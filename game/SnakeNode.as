@@ -1,9 +1,13 @@
 package game {
 	import flash.display.Sprite;
 	import flash.events.Event;
-	final public class SnakeNode extends Sprite {
+	import flash.geom.Point;
+	import game.iDrawTo;
+	final public class SnakeNode extends Sprite implements iDrawTo {
 		private const DRAWWIDTH:int = 5;
-		final public function SnakeNode():void {
+		final public function SnakeNode(newPoint:Point):void {
+			x = newPoint.x;
+			y = newPoint.y;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		final private function init(event:Event):void {
