@@ -6,8 +6,7 @@ package game {
 	final public class SnakeNode extends Sprite implements iDrawTo {
 		private const DRAWWIDTH:int = 5;
 		final public function SnakeNode(newPoint:Point):void {
-			x = newPoint.x;
-			y = newPoint.y;
+			moveTo(newPoint);
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		final private function init(event:Event):void {
@@ -20,9 +19,12 @@ package game {
 			canvas.graphics.beginFill(0x0);
 			canvas.graphics.drawRect(x - DRAWWIDTH / 2, y - DRAWWIDTH / 2, DRAWWIDTH, DRAWWIDTH);
 		}
-		final public function moveTo(newX:Number, newY:Number):void {
-			x = newX;
-			y = newY;
+		final public function moveTo(newPoint:Point):void {
+			x = newPoint.x;
+			y = newPoint.y;
+		}
+		final public function getPos():Point {
+			return new Point(x, y);
 		}
 	}
 }

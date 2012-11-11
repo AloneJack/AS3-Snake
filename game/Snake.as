@@ -7,8 +7,10 @@ package game {
 	import game.iTick;
 	import game.iDrawTo;
 	public class Snake extends MovieClip implements iTick, iDrawTo {
-		private var myV:Number;
+		private var myVel:Number;
 		private var myNodes:Array;
+		private var vx:Number;
+		private var vy:Number;
 		final public function Snake(nodeCount:int, beginPoint:Point):void {
 			myNodes = [];
 			for (var i:int = 0; i < nodeCount; i++) myNodes.push(new SnakeNode(beginPoint));
@@ -19,7 +21,14 @@ package game {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		final public function enterTick(event:TimerEvent):void {
-			
+			if (myNodes.length <= 0) return;
+			var prevPos:Point = SnakeNode(myNodes[0]).getPos();
+			var myNode:SnakeNode;
+			for (var i:int = 1; i < myNodes.length;i++) {
+				myNode.moveTo(prevPos);
+				prevPos = SnakeNode(myNodes[i]).getPos();
+			}
+			SnakeNode(myNodes[0]).moveTo(SnakeNode(myNodes[0]).getPos().add(new Point(vx, vy)));
 		}
 		final public function drawTo(canvas:Sprite):void {
 			for each(var myNode:iDrawTo in myNodes) myNode.drawTo(canvas);
