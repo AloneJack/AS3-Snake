@@ -13,7 +13,7 @@ package game {
 		private var vy:Number;
 		final public function Snake(nodeCount:int, beginPoint:Point):void {
 			myNodes = [];
-			vx = 1;
+			vx = SPEED;
 			vy = 0;
 			for (var i:int = 0; i < nodeCount; i++) myNodes.push(new SnakeNode(beginPoint));
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -24,17 +24,42 @@ package game {
 		}
 		final public function enterTick(event:TimerEvent):void {
 			if (!myNodes || myNodes.length <= 0) return;
-			var prevPos:Point = SnakeNode(myNodes[0]).getPos();
 			var myNode:SnakeNode;
-			for (var i:int = 1; i < myNodes.length; i++) {
+			for (var i:int = myNodes.length-1; i > 0; i--) {
 				myNode = myNodes[i];
-				myNode.moveTo(prevPos);
-				prevPos = myNode.getPos();
+				myNode.moveTo(myNodes[i-1].getPos());
 			}
 			SnakeNode(myNodes[0]).moveTo(SnakeNode(myNodes[0]).getPos().add(new Point(vx, vy)));
 		}
 		final public function changeDirection(newDirection:int):void {
-			
+			if (newDirection < 0 || getDirection() == newDirection || (getDirection() + newDirection) % 2 == 0) return;
+			switch(newDirection) {
+				case 0: vx = -SPEED;
+					vy = 0;
+					break;
+				case 1: vx = 0;
+					vy = -SPEED;
+					break;
+				case 2: vx = SPEED;
+					vy = 0;
+					break;
+				case 3: vx = 0;
+					vy = SPEED;
+					break;
+				default:
+					break;
+			}
+		}
+		final public function getDirection():int {
+			if (vx > 0) return 2;
+			else if (vx < 0) return 0;
+			else if (vy < 0) return 1;
+			else if (vy > 0) return 3;
+			throw new Error("Velocity variables unyeilding");
+			return -1;
+		}
+		final public function wrap(w:int, h:int):void {
+			for each(var myNode:SnakeNode in myNodes) myNode.wrap(w, h);
 		}
 		final public function drawTo(canvas:Sprite):void {
 			for each(var myNode:iDrawTo in myNodes) myNode.drawTo(canvas);
