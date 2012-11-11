@@ -9,15 +9,18 @@ package {
 	import game.iTick;
 	import game.Snake;
 	import game.KeyManager;
+	import toolkit.Keylogger;
 	final public class Main extends MovieClip implements iTick {
 		private var mySnake:Snake;
 		private var gameTimer:Timer = new Timer(70);
 		private var gameField:Array;
+		private var myKeylogger:Keylogger;
 		private const startingSnakeLen:int = 5;
 		private const playingWidth:int = 20;
 		private const playingHeight:int = playingWidth;
 		public static const nodeWidth:int = 15;
 		final public function Main(stage:Object):void {
+			myKeylogger = new Keylogger(stage);
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		final private function init(event:Event):void {

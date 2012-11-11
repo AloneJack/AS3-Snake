@@ -11,6 +11,9 @@
 			myStage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown)
 			myStage.addEventListener(MouseEvent.MOUSE_UP, mouseUp)
 		}
+		final public function wipeNewKeys():void {
+			 newKeys = new Array(250);
+		}
 		final private function newDown(event:KeyboardEvent):void {
 			//trace(event.keyCode);
 			newKeys[event.keyCode] = !allKeys[event.keyCode];
