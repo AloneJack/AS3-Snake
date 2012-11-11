@@ -10,7 +10,7 @@ package {
 		private var mySnake = new Snake;
 		private var gameTimer:Timer = new Timer(100);
 		private const playingWidth:int = 20;
-		private const nodeWidth:int = 15;
+		public static const nodeWidth:int = 15;
 		final public function Main(stage:Object):void {
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
