@@ -4,6 +4,7 @@ package game {
 	import flash.geom.Point;
 	import game.iDrawTo;
 	final public class SnakeNode extends Sprite implements iDrawTo {
+		private var myColour:int = 0x0;
 		final public function SnakeNode(newPoint:Point):void {
 			moveTo(newPoint);
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -15,7 +16,7 @@ package game {
 			removeEventListener(Event.REMOVED_FROM_STAGE, destroy);
 		}
 		final public function drawTo(canvas:Sprite):void {
-			canvas.graphics.beginFill(0x0);
+			canvas.graphics.beginFill(myColour);
 			var x:Number = this.x * Main.nodeWidth;
 			var y:Number = this.y * Main.nodeWidth;
 			canvas.graphics.drawRect(x, y, Main.nodeWidth , Main.nodeWidth);
@@ -23,6 +24,9 @@ package game {
 		final public function moveTo(newPoint:Point):void {
 			x = newPoint.x;
 			y = newPoint.y;
+		}
+		final public function setColour(newColour:int):void {
+			myColour = newColour;
 		}
 		final public function wrap(width:int, height:int):void {
 			x %= width;

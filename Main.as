@@ -45,8 +45,8 @@ package {
 			mySnake.changeDirection(KeyManager.getDirection());
 			mySnake.enterTick(event);
 			mySnake.wrap(playingWidth, playingHeight);
-			testEat();
 			testGameOver();
+			testEat();
 			graphics.clear();
 			mySnake.drawTo(this);
 			for each(var foodNode:iDrawTo in myFood) foodNode.drawTo(this);
@@ -66,7 +66,7 @@ package {
 			}
 		}
 		final private function testGameOver():void {
-			
+			if (mySnake.hittingSelf()) gameTimer.stop();
 		}
 		final private function randomAvailableGamePoint():Point {
 			if (gameField.length == 0) throw new Error("gameField array length zero");

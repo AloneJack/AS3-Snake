@@ -71,6 +71,14 @@ package game {
 		final public function grow(nodes:int):void {
 			for (var i:int = 0; i < nodes;i++) myNodes.push(new SnakeNode(getHeadPos()));
 		}
+		final public function hittingSelf():Boolean {
+			var headPoint:Point = getHeadPos();
+			for (var i:int = 1; i < myNodes.length; i++) if (headPoint.equals(SnakeNode(myNodes[i]).getPos())){
+				for (var q:int = 0; q < myNodes.length; q++) SnakeNode(myNodes[q]).setColour(0xFF0000);
+				return true;
+			}
+			return false;
+		}
 		final private function destroy(event:Event):void {
 			removeEventListener(Event.REMOVED_FROM_STAGE, destroy);
 		}
