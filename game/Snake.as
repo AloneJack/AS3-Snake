@@ -64,6 +64,13 @@ package game {
 		final public function drawTo(canvas:Sprite):void {
 			for each(var myNode:iDrawTo in myNodes) myNode.drawTo(canvas);
 		}
+		final public function getHeadPos():Point {
+			if (myNodes.length < 0) throw new Error("Snake body non existant");
+			return SnakeNode(myNodes[0]).getPos();
+		}
+		final public function grow(nodes:int):void {
+			for (var i:int = 0; i < nodes;i++) myNodes.push(new SnakeNode(getHeadPos()));
+		}
 		final private function destroy(event:Event):void {
 			removeEventListener(Event.REMOVED_FROM_STAGE, destroy);
 		}

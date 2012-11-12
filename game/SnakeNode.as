@@ -26,8 +26,8 @@ package game {
 		}
 		final public function wrap(width:int, height:int):void {
 			x %= width;
-			if (x < 0) x = width - 1;
 			y %= height;
+			if (x < 0) x = width - 1;
 			if (y < 0) y = height - 1;
 		}
 		final public function getPos():Point {
